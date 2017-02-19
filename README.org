@@ -1,0 +1,31 @@
+* =messages-are-flowing=
+
+If you're writing an email in Emacs, and the recipient reads it on
+their phone, changes are it's going to look like this:
+
+[[./non-flowed.png]]
+
+If you use =messages-are-flowing=, it will hopefully look like this instead:
+
+[[./flowed.png]]
+
+This works by distinguishing "hard" and "soft" newlines while writing
+the message.  As shown in this screenshot, hard newlines are
+designated with "⏎":
+
+[[./hard-newline-in-buffer.png]]
+
+The "flowed" text format is described in [[https://tools.ietf.org/html/rfc2646][RFC 2646]].
+
+** How to use it
+
+Install =messages-are-flowing.el= with =M-x package-install-file=, and
+then add the following to your =.emacs= file:
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load "message"
+  (add-hook 'message-mode-hook 'messages-are-flowing-use-and-mark-hard-newlines))
+#+END_SRC
+
+
+#+STARTUP: showall
