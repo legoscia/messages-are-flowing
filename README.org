@@ -23,8 +23,7 @@ Install =messages-are-flowing.el= with =M-x package-install-file=, and
 then add the following to your =.emacs= file:
 
 #+BEGIN_SRC emacs-lisp
-(with-eval-after-load "message"
-  (add-hook 'message-mode-hook 'messages-are-flowing-use-and-mark-hard-newlines))
+(add-hook 'message-mode-hook 'messages-are-flowing-use-and-mark-hard-newlines)
 #+END_SRC
 
 
