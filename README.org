@@ -1,7 +1,7 @@
 * =messages-are-flowing=
 
 If you're writing an email in Emacs, and the recipient reads it on
-their phone, changes are it's going to look like this:
+their phone, chances are it's going to look like this:
 
 [[./non-flowed.png]]
 
