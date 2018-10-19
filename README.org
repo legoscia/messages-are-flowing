@@ -26,5 +26,23 @@ then add the following to your =.emacs= file:
 (add-hook 'message-mode-hook 'messages-are-flowing-use-and-mark-hard-newlines)
 #+END_SRC
 
+This package also supports inserting spaces for soft newlines via the
+following:
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'message-mode-hook 'messages-are-flowing-enhance-fill-newline)
+#+END_SRC
+
+NOTE: the modes need to be specified when to use the enhanced
+fill-newline:
+
+#+BEGIN_SRC emacs-lisp
+(use-package messages-are-flowing
+  :custom (messages-are-flowing-enhance-fill-newline-modes '(message-mode))
+)
+#+END_SRC
+
+This can be useful if using a mailer that does not post-encode the
+text (ie: mutt).
 
 #+STARTUP: showall
