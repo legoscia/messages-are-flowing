@@ -45,6 +45,11 @@
 
 ;;; Code:
 
+(defcustom messages-are-flowing-newline-marker "⏎"
+  "String used to visualise hard newlines."
+  :type 'string
+  :group 'message-interface)
+
 ;;;###autoload
 (defun messages-are-flowing-use-and-mark-hard-newlines ()
   "Turn on `use-hard-newlines', and make hard newlines visible.
@@ -67,7 +72,10 @@ For each soft newline, remove any display property."
       (let ((pos (1- (point))))
         (if (get-text-property pos 'hard)
             ;; Use `copy-sequence', because display property values must not be `eq'!
-            (add-text-properties pos (1+ pos) (list 'display (copy-sequence "⏎\n")))
+            (add-text-properties
+	     pos (1+ pos)
+	     (list 'display (copy-sequence
+			     (concat messages-are-flowing-newline-marker "\n"))))
           (remove-text-properties pos (1+ pos) '(display nil)))))))
 
 (provide 'messages-are-flowing)
