@@ -50,6 +50,12 @@
   :type 'string
   :group 'message-interface)
 
+(defcustom messages-are-flowing-guess-hard-newlines nil
+  "Whether to guess automatically which newlines should be marked as hard when running MESSAGES-ARE-FLOWING-USE-AND-MARK-HARD-NEWLINES. GUESS means to do so when in a buffer with newlines but with no hard newlines. NIL means always ask what to do, ALWAYS means to guess even when some hard newlines already exist in the buffer. NEVER means never to guess." 
+  :type 'symbol 
+  :options (list 'always 'guess 'never nil)
+  :group 'message-interface)
+
 ;;;###autoload
 (defun messages-are-flowing-use-and-mark-hard-newlines ()
   "Turn on `use-hard-newlines', and make hard newlines visible.
@@ -57,7 +63,8 @@ The main use of this is to send \"flowed\" email messages, where
 line breaks within paragraphs are adjusted by the recipient's
 device, such that messages remain readable on narrow displays."
   (interactive)
-  (use-hard-newlines)
+  (use-hard-newlines nil messages-are-flowing-guess-hard-newlines)
+  (messages-are-flowing--mark-hard-newlines (point-min) (point-max))
   (add-hook 'after-change-functions 'messages-are-flowing--mark-hard-newlines nil t))
 
 (defun messages-are-flowing--mark-hard-newlines (beg end &rest _ignore)
